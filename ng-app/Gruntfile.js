@@ -18,7 +18,7 @@ module.exports = function (grunt) {
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: 'dist'
+    dist: '../public'
   };
 
   // Define the configuration for all the tasks
@@ -70,6 +70,11 @@ module.exports = function (grunt) {
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
         livereload: 35729
+      },
+      proxies: {
+        context: '/api',
+        host: 'localhost',
+        port: 3000
       },
       livereload: {
         options: {
