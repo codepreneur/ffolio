@@ -1,15 +1,16 @@
 class S3Controller < ApplicationController
 
 	def index
+    cors_set_access_control_headers
 		s3_access_token
 	end
 
 	def s3_access_token
-      render json: {
-        policy:    s3_upload_policy,
-        signature: s3_upload_signature,
-        key:       Rails.application.secrets.s3_access_key
-      }
+    render json: {
+      policy:    s3_upload_policy,
+      signature: s3_upload_signature,
+      key:       Rails.application.secrets.s3_access_key
+    }
   end
 
   protected
@@ -34,6 +35,13 @@ class S3Controller < ApplicationController
 
   def s3_upload_signature
     Base64.encode64(OpenSSL::HMAC.digest(OpenSSL::Digest::Digest.new('sha1'), Rails.application.secrets.s3_secret_key, s3_upload_policy)).gsub("\n","")
+  end
+
+  def cors_set_access_control_headers
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
+    headers['Access-Control-Allow-Headers'] = '*'
+    headers['Access-Control-Max-Age'] = "1728000"
   end
 
 end

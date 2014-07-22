@@ -3,10 +3,12 @@
 </div>
 
 
+
 <div class="row marketing">
     <div class="form-group">
         <label for="photos">Input Picture</label>
         <input id="photos" type="file" class="btn" ng-file-select="onFileSelect($files)" multiple>
+        <div ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="optional-css-class-name-or-function">drop files here</div>
         <p class="help-block">Select pictures</p>
         <div ng-repeat="file in files" class="container">
             <div class="progress">
@@ -19,6 +21,12 @@
     </div>
 </div>
 
+<h1>Gallery</h1>
+<div ng-repeat="image in images"><p><img src="{{image.url}}" style="width: 50px; height: 50px;" alt=""></p></div>
 
-<div s3-upload bucket="'ffolio'" ng-model="product.remote_product_file_url"
+
+
+
+<!-- <div s3-upload bucket="'ffolio'" ng-model="product.remote_product_file_url"
    s3-upload-options="{getOptionsUri: 'http://localhost:3000/api/s3', folder: 'images/'}">
+</div> -->
