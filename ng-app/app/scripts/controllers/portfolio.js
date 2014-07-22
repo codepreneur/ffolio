@@ -5,14 +5,19 @@ angular.module('ffolioApp')
 
     $scope.pendingImages = [];
 
+    $scope.remove = function(id){
+        $http.delete('/api/images/' + id).success(function(deletedImage){
+            $scope.images = _.filter($scope.images, function(image) {
+                return deletedImage.id !== image.id;
+            });
+        })
+    }
+
     $http.get('/api/images').success(function(data){
         $scope.images = data;
-        console.log(data);
+        // console.log(data);
     })
 
-    $scope.$watch($scope.images,function(){
-        $scope.$apply();
-    })
 
     $scope.imageUploads = [];
         $scope.abort = function(index) {

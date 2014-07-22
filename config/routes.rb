@@ -4,9 +4,7 @@ Rails.application.routes.draw do
 
   scope '/api' do
     get '/s3' => 's3#index'
-    post '/images' => 'images#create'
-    get '/images' => 'images#index'
-    delete '/images' => 'images#destroy'
+    resources :images
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

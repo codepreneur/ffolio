@@ -6,11 +6,14 @@ class ImagesController < ApplicationController
 	end
 
 	def create
-		image = Image.create(url: params[:url])
+		image = Image.create url: params[:url] 
 		render json: image
 	end
 
 	def destroy
+		image = Image.find params[:id]
+		image.destroy!
+		render json: image
 	end
 
 end
